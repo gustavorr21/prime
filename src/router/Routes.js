@@ -1,46 +1,26 @@
-import React from 'react';
-import {BrowserRouter as Router, NavLink, Switch,Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from '../components/Header/header';
+import Favoritos from '../pages/Favoritos/favoritos';
+
 import Filme from '../pages/Filme';
 import Home from '../pages/Home';
-import '../index.css';
 import PageNotFound from '../pages/PageNotFound/pageNotFound';
 
-function RouterApp() {
-  return (
-    <Router>
-      <header>
-        {/* <nav> */}
-          {/* <ul> */}
-            <NavLink className="logo" to="/" exact>Inicio</NavLink>
-            <NavLink className="favoritos" to="/filme">filme</NavLink>
-          {/* </ul> */}
-        {/* </nav> */}
-      </header>
 
-      <main>
+function RouterApp(){
+  return(
+    <BrowserRouter>
+     <Header/>
+      <Routes>
+        <Route path="/" element={ <Home/> } />
+        <Route path="/filme/:id" element={ <Filme/> } />
+        <Route path="/favoritos" element={ <Favoritos/> } />
 
-      <Switch>
         
-        <Route path="/" exact>
-        <Home />
-        </Route>
-
-        <Route path="/filme" exact>
-        <Filme />
-        </Route>
-
-        <Route path="/filme/:id" exact>
-        <Filme />
-        </Route>
-
-        <Router path="*">
-        <PageNotFound/>
-        </Router>
-
-      </Switch>
-      </main>
-    </Router>
-  );
+        {<Route path="*" element={ <PageNotFound/> } /> }
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default RouterApp;
