@@ -2,11 +2,13 @@
 import {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom';
 import api from '../../services/api'
-import '../../pages/Home/home.css'
+import Loading from '../Loading/loading';
+import './../Home/home.css'
 
 function Home(){
 
-    const [filmes, setFilme] = useState('')
+    const [filmes, setFilme] = useState([])
+    const [loading , setLoading] = useState(true)
 
     useEffect(() =>{
         async function loadFilmes(){
@@ -14,11 +16,10 @@ function Home(){
                 params: {
                     api_key: "d27827bbd45a5e389b27fa5b90624883",
                     language: "pt-BR",
-			  page: 1,
+			              page: 1,
                 }
             })
-
-
+            setLoading(false)
             setFilme(response.data.results.slice(0,10))
         }
 
@@ -26,9 +27,17 @@ function Home(){
 
     }, [])
 
+    if(loading){
+      return (
+          <div>
+          <Loading title="Aguarde a tela para exibir todos os filmes"/>
+      </div>
+      )
+  }
+
     return(
         <div className="container">
-          <div className="lista-filmes">
+          <div className="lista-filme">
             {filmes.map((filme) => {
               return(
                 <article key={filme.id}>

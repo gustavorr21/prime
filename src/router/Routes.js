@@ -3,6 +3,7 @@ import {BrowserRouter as Router, NavLink, Switch,Route} from 'react-router-dom'
 import Filme from '../pages/Filme';
 import Home from '../pages/Home';
 import '../index.css';
+import PageNotFound from '../pages/PageNotFound/pageNotFound';
 
 function RouterApp() {
   return (
@@ -32,9 +33,9 @@ function RouterApp() {
         <Filme />
         </Route>
 
-        {/* <Router path="*">
+        <Router path="*">
         <PageNotFound/>
-        </Router> */}
+        </Router>
 
       </Switch>
       </main>
